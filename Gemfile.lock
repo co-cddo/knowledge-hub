@@ -69,6 +69,8 @@ GEM
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
+    awesome_nested_set (3.5.0)
+      activerecord (>= 4.0.0, < 7.1)
     bindex (0.8.1)
     bootsnap (1.15.0)
       msgpack (~> 1.2)
@@ -305,6 +307,9 @@ GEM
     unicorn (6.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    validate_url (1.0.15)
+      activemodel (>= 3.0.0)
+      public_suffix
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -327,6 +332,7 @@ PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
+  awesome_nested_set
   bootsnap
   capybara
   dartsass-rails
@@ -345,6 +351,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  validate_url
   web-console
   webdrivers
 

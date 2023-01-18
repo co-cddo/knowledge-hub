@@ -10,6 +10,12 @@
   </head>
 
   <body>
+    <%= content_tag(:p, notice, class: 'notice', style: "color: green") if notice.present? %>
+    <%= content_tag(:p, alert, class: 'alert', style: "color: red") if alert.present? %>
+    <%= link_to 'Items:', items_path %>
+    <% Item.roots.each do |root_item| %>
+      <%= link_to root_item.name, root_item %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

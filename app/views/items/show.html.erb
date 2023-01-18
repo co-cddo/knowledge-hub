@@ -1,0 +1,42 @@
+<div id="<%= dom_id @item %>">
+  <p>
+    <strong>Name:</strong>
+    <%= link_to @item.name, @item.source_url %>
+  </p>
+
+  <p>
+    <strong>Tags:</strong>
+    <%= @item.tags %>
+  </p>
+
+
+  <p>
+    <strong>Parent:</strong>
+    <% if @item.parent %>
+      <%= link_to @item.parent.name, @item.parent %>
+    <% else %>
+      None - Root item
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Children:</strong>
+    <% if @item.children.present? %>
+      <% @item.children.each do |child| %>
+        <%= link_to child.name, child %>
+      <% end %>
+    <% else %>
+      None
+    <% end %>
+  </p>
+
+  <hr>
+  <%= govspeak_to_html @item.description %>
+
+</div>
+
+<div>
+  <%= link_to "Edit this item", edit_item_path(@item) %>
+
+  <%= button_to "Destroy this item", @item, method: :delete %>
+</div>

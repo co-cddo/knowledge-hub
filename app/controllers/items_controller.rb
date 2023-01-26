@@ -55,6 +55,6 @@ private
 
   # Only allow a list of trusted parameters through.
   def item_params
-    params.require(:item).permit(:name, :source_url, :tags, :description, :parent_id)
+    params.require(:item).permit(:name, :source_url, :tag_list, :description, :parent_id)
   end
 end

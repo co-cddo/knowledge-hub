@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "/items", type: :request do
   let(:valid_attributes) do
-    attributes_for :item
+    attributes_for :item, :for_params
   end
 
   let(:invalid_attributes) do
@@ -14,10 +14,10 @@ RSpec.describe "/items", type: :request do
       description: "",
     }
   end
+  let(:item) { create :item }
 
   describe "GET /index" do
     it "renders a successful response" do
-      Item.create! valid_attributes
       get items_url
       expect(response).to be_successful
     end
@@ -25,7 +25,6 @@ RSpec.describe "/items", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      item = Item.create! valid_attributes
       get item_url(item)
       expect(response).to be_successful
     end
@@ -40,7 +39,6 @@ RSpec.describe "/items", type: :request do
 
   describe "GET /edit" do
     it "renders a successful response" do
-      item = Item.create! valid_attributes
       get edit_item_url(item)
       expect(response).to be_successful
     end
@@ -76,17 +74,15 @@ RSpec.describe "/items", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) { attributes_for :item }
+      let(:new_attributes) { attributes_for :item, :for_params }
 
       it "updates the requested item" do
-        item = Item.create! valid_attributes
         patch item_url(item), params: { item: new_attributes }
         item.reload
         expect(item.name).to eq(new_attributes[:name])
       end
 
       it "redirects to the item" do
-        item = Item.create! valid_attributes
         patch item_url(item), params: { item: new_attributes }
         item.reload
         expect(response).to redirect_to(item_url(item))
@@ -95,23 +91,33 @@ RSpec.describe "/items", type: :request do
 
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        item = Item.create! valid_attributes
         patch item_url(item), params: { item: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+
+    context "with multiple tags" do
+      let(:tags) { %w[foo bar] }
+      let(:attributes) do
+        attributes_for :item, tag_list: tags.map { |t| { value: t } }.to_json
+      end
+
+      it "associates the tags with the item" do
+        patch item_url(item), params: { item: attributes }
+        expect(item.reload.tag_list).to eq(tags)
       end
     end
   end
 
   describe "DELETE /destroy" do
     it "destroys the requested item" do
-      item = Item.create! valid_attributes
+      item # create item before action to ensure count correct
       expect {
         delete item_url(item)
       }.to change(Item, :count).by(-1)
     end
 
     it "redirects to the items list" do
-      item = Item.create! valid_attributes
       delete item_url(item)
       expect(response).to redirect_to(items_url)
     end

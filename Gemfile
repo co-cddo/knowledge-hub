@@ -61,7 +61,7 @@ gem "awesome_nested_set"
 gem "validate_url"
 
 # Manages object tagging
-gem 'acts-as-taggable-on'
+gem "acts-as-taggable-on"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

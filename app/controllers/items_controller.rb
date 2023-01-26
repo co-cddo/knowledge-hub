@@ -24,7 +24,6 @@ class ItemsController < ApplicationController
   # POST /items
   def create
     @item = Item.new(item_params)
-
     if item.save
       redirect_to item, notice: "Item was successfully created."
     else
@@ -55,6 +54,10 @@ private
 
   # Only allow a list of trusted parameters through.
   def item_params
-    params.require(:item).permit(:name, :source_url, :tag_list, :description, :parent_id)
+    params.require(:item).permit(:name, :source_url, :tag_list, :description, :parent_id).tap do |hash|
+      return hash if hash[:tag_list].blank?
+
+      hash[:tag_list] = JSON.parse(hash[:tag_list]).map { |h| h["value"] }.join(",")
+    end
   end
 end

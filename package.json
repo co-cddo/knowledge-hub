@@ -2,6 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@yaireo/tagify": "^4.17.7",
     "esbuild": "^0.17.3",
     "govuk-frontend": "^4.4.1"
   },

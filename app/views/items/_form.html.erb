@@ -23,7 +23,7 @@
 
   <div>
     <%= form.label :tag_list, 'tags', style: "display: block" %>
-    <%= form.text_field :tag_list %>
+    <%= form.text_field :tag_list, value: form.object.tag_list.join(',') %>
   </div>
 
   <div>
@@ -43,4 +43,19 @@
   <div>
     <%= form.submit %>
   </div>
+<% end %>
+
+<%= javascript_tag do %>
+  var inputElement = document.querySelector("#item_tag_list")
+  var tagify = new Tagify(inputElement, {
+        whitelist : <%= ActsAsTaggableOn::Tag.for_context(:tags).uniq.pluck(:name).to_json.html_safe %>,
+        dropdown : {
+            classname     : "color-blue",
+            enabled       : 0,              // show the dropdown immediately on focus
+            maxItems      : 5,
+            position      : "text",         // place the dropdown near the typed text
+            closeOnSelect : false,          // keep the dropdown open after selecting a suggestion
+            highlightFirst: true
+        }
+      })
 <% end %>

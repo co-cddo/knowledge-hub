@@ -6,6 +6,7 @@
 # of that item. The top level items are roots.
 class Item < ApplicationRecord
   acts_as_nested_set counter_cache: "children_count"
+  acts_as_taggable_on :tags
 
   validates :name, :description, presence: true
   validates :source_url, url: true

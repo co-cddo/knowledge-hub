@@ -4,7 +4,11 @@ FactoryBot.define do
   factory :item do
     name { Faker::Commerce.product_name }
     source_url { Faker::Internet.url }
-    tags { Faker::Internet.slug }
+    tag_list { [Faker::Internet.slug] }
     description { Faker::Lorem.paragraph }
+
+    trait :for_params do
+      tag_list { [Faker::Internet.slug].map { |tag| { value: tag } }.to_json }
+    end
   end
 end

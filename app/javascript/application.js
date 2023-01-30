@@ -2,3 +2,5 @@
 require ('./govuk');
 import GOVUKFrontend from "./govuk"
 window.GOVUKFrontend = GOVUKFrontend
+
+require ('./tagify')

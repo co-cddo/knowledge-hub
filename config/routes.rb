@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :items
+  resources :item_searches, only: [:index]
 end

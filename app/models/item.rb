@@ -10,4 +10,6 @@ class Item < ApplicationRecord
 
   validates :name, :description, presence: true
   validates :source_url, url: true
+
+  update_index("items") { self }
 end

@@ -4,6 +4,8 @@
 module ApplicationHelper
   require "govspeak"
   def govspeak_to_html(govspeak)
+    return unless govspeak.present?
+
     doc = Govspeak::Document.new govspeak
     doc.to_html.html_safe
   end

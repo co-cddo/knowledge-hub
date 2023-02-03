@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<%= image_tag('favicon.ico') %>" type="image/x-icon">
-    <link rel="mask-icon" href="<%= image_tag('govuk-mask-icon.svg') %>" color="#0b0c0c">
-    <link rel="apple-touch-icon" sizes="180x180" href="<%= image_tag('govuk-apple-touch-icon-180x180.png') %>">
-    <link rel="apple-touch-icon" sizes="167x167" href="<%= image_tag('govuk-apple-touch-icon-167x167.png') %>">
-    <link rel="apple-touch-icon" sizes="152x152" href="<%= image_tag('govuk-apple-touch-icon-152x152.png') %>">
-    <link rel="apple-touch-icon" href="<%= image_tag('govuk-apple-touch-icon.png') %>">
+    <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<%= asset_path('favicon.ico') %>" type="image/x-icon">
+    <link rel="mask-icon" href="<%= asset_path('govuk-mask-icon.svg') %>" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= asset_path('govuk-apple-touch-icon-180x180.png') %>">
+    <link rel="apple-touch-icon" sizes="167x167" href="<%= asset_path('govuk-apple-touch-icon-167x167.png') %>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<%= asset_path('govuk-apple-touch-icon-152x152.png') %>">
+    <link rel="apple-touch-icon" href="<%= asset_path('govuk-apple-touch-icon.png') %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -29,20 +29,21 @@
       <main class="govuk-main-wrapper " id="main-content" role="main">
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-two-thirds">
-          <%= content_tag(:p, notice, class: 'notice', style: "color: green") if notice.present? %>
-          <%= content_tag(:p, alert, class: 'alert', style: "color: red") if alert.present? %>
-          <%= link_to 'Items:', items_path %>
-          <% Item.roots.each do |root_item| %>
-            <%= link_to root_item.name, root_item %>
-          <% end %>
-          <%= yield %>
+            <%= content_tag(:p, notice, class: 'notice', style: "color: green") if notice.present? %>
+            <%= content_tag(:p, alert, class: 'alert', style: "color: red") if alert.present? %>
+            <%= render "layouts/search" %>
+            <%= link_to 'Items:', items_path %>
+            <% Item.roots.each do |root_item| %>
+              <%= link_to root_item.name, root_item %>
+            <% end %>
+            <%= yield %>
+          </div>
         </div>
-      </div>
-    </main>
-  </div>
-  <%= render "layouts/footer" %>
-  <script>
-    window.GOVUKFrontend.initAll()
-  </script>
-</body>
+      </main>
+    </div>
+    <%= render "layouts/footer" %>
+    <script>
+      window.GOVUKFrontend.initAll()
+    </script>
+  </body>
 </html>

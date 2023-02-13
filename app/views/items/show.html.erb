@@ -40,3 +40,18 @@
 
   <%= button_to "Destroy this item", @item, method: :delete %>
 </div>
+
+<div>
+  <div>
+    <p>Comments</p>
+    <%= form_with(model: [@item, @item.comments.build]) do |f| %>
+      <div class="govuk-form-group">
+        <%= f.label :body, 'New comment' %>
+        <%= f.text_area :body %>
+      </div>
+      <%= f.submit 'Submit' %>
+    <% end %>
+  </div>
+</div>
+
+<%= render @item.comments %>

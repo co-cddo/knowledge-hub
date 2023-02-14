@@ -1,5 +1,14 @@
 <%= render @location %>
 
+<h2>Items</h2>
+<ul>
+  <% @location.items.each do |item| %>
+    <li>
+      <%= link_to item.name, location_item_path(@location, item) %>
+    </li>
+  <% end %>
+</ul>
+
 <div>
   <%= link_to "Edit this location", edit_location_path(@location) %> |
   <%= link_to "Back to locations", locations_path %>

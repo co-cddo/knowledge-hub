@@ -1,9 +1,9 @@
 <h1>New comment</h1>
 
-<%= render "form", comment: @comment, item: @item %>
+<%= render "form", location: @location, comment: @comment, item: @item %>
 
 <br>
 
 <div>
-  <%= link_to "Back to comments", item_comments_path %>
+  <%= link_to "Back to comments", location_item_comments_path(@location, @item) %>
 </div>

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[show edit update destroy]
-  before_action :set_item, only: %i[show edit update destroy create index new]
+  before_action :set_item_and_location
+  before_action :comment, only: %i[show edit new]
 
   def index
     @comments = Comment.all
@@ -8,44 +8,51 @@ class CommentsController < ApplicationController
 
   def show; end
 
-  def new
-    @comment = @item.comments.new
-  end
-
-  def edit; end
+  def new; end
 
   def create
-    @comment = @item.comments.new(comment_params)
+    @comment = item.comments.new(comment_params)
 
-    if @comment.save
-      redirect_to @item, notice: "Comment was successfully created."
+    if comment.save
+      redirect_to [location, item], notice: "Comment was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+  def edit; end
+
   def update
-    if @comment.update(comment_params)
-      redirect_to @item, notice: "Comment was successfully updated."
+    if comment.update(comment_params)
+      redirect_to [location, item], notice: "Comment was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @comment.destroy
-    redirect_to @item, notice: "Comment was successfully destroyed."
+    comment.destroy
+    redirect_to [location, item], notice: "Comment was successfully destroyed."
   end
 
 private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_comment
-    @comment = Comment.find(params[:id])
+  def comment
+    @comment ||= params[:id].present? ? Comment.find(params[:id]) : item.comments.new
   end
 
-  def set_item
-    @item = Item.find(params[:item_id])
+  def item
+    @item ||= Item.find(params[:item_id])
+  end
+
+  def location
+    @location ||= Location.find(params[:location_id])
+  end
+
+  def set_item_and_location
+    item
+    location
   end
 
   # Only allow a list of trusted parameters through.

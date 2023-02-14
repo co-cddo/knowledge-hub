@@ -4,7 +4,7 @@
   <ul>
     <% @search.documents.each do |item| %>
       <li class="item">
-        <%= link_to item.name, item %>
+        <%= link_to item.name, item_path(item) %>
       </li>
     <% end %>
   </ul>

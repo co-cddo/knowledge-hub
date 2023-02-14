@@ -6,6 +6,7 @@ FactoryBot.define do
     source_url { Faker::Internet.url }
     tag_list { [Faker::Internet.slug] }
     description { Faker::Lorem.paragraph }
+    location
 
     trait :for_params do
       tag_list { [Faker::Internet.slug].map { |tag| { value: tag } }.to_json }

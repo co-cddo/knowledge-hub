@@ -9,4 +9,8 @@ module ApplicationHelper
     doc = Govspeak::Document.new govspeak
     doc.to_html.html_safe
   end
+
+  def item_path(item)
+    location_item_path(item.location, item)
+  end
 end

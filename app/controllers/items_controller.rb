@@ -3,7 +3,7 @@
 class ItemsController < ApplicationController
   # GET /items
   def index
-    @items = Item.roots
+    @items = location.items.roots
   end
 
   # GET /items/1
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    @item = Item.new
+    @item = location.items.build
   end
 
   # GET /items/1/edit
@@ -23,9 +23,9 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
-    @item = Item.new(item_params)
+    @item = location.items.build(item_params)
     if item.save
-      redirect_to item, notice: "Item was successfully created."
+      redirect_to [location, item], notice: "Item was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   def update
     if item.update(item_params)
-      redirect_to item, notice: "Item was successfully updated."
+      redirect_to [location, item], notice: "Item was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -43,13 +43,17 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   def destroy
     item.destroy
-    redirect_to items_path, notice: "Item was successfully destroyed."
+    redirect_to location_items_path(location), notice: "Item was successfully destroyed."
   end
 
 private
 
   def item
-    @item ||= Item.find(params[:id])
+    @item ||= location.items.find(params[:id])
+  end
+
+  def location
+    @location ||= Location.find(params[:location_id])
   end
 
   # Only allow a list of trusted parameters through.

@@ -5,6 +5,11 @@
   </p>
 
   <p>
+    <strong>Location: </strong>
+    <%= link_to @item.location.name, @item.location %>
+  </p>
+
+  <p>
     <strong>Tags:</strong>
     <%= @item.tag_list %>
   </p>
@@ -36,15 +41,15 @@
 </div>
 
 <div>
-  <%= link_to "Edit this item", edit_item_path(@item) %>
+  <%= link_to "Edit this item", edit_location_item_path(@location, @item) %>
 
-  <%= button_to "Destroy this item", @item, method: :delete %>
+  <%= button_to "Destroy this item", [@location, @item], method: :delete %>
 </div>
 
 <div>
   <div>
     <p>Comments</p>
-    <%= form_with(model: [@item, @item.comments.build]) do |f| %>
+    <%= form_with(model: [@location, @item, @item.comments.build]) do |f| %>
       <div class="govuk-form-group">
         <%= f.label :body, 'New comment' %>
         <%= f.text_area :body %>

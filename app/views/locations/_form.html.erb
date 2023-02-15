@@ -1,10 +1,10 @@
-<%= form_with(model: [item.location, item]) do |form| %>
-  <% if item.errors.any? %>
+<%= form_with(model: location) do |form| %>
+  <% if location.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+      <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
 
       <ul>
-        <% item.errors.each do |error| %>
+        <% location.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -12,8 +12,6 @@
   <% end %>
 
   <%= form.govuk_text_field :name %>
-
-  <%= form.govuk_text_field :source_url %>
 
   <div class="govuk-form_group govuk-!-margin-bottom-7">
     <%= form.label :tag_list, 'Tags', style: "display: block", class: 'govuk-label' %>
@@ -27,16 +25,15 @@
   <%= form.govuk_text_area :description %>
 
 
-  <% parent_options = nested_set_options(Item, item) do |i|
-      "#{'–' * i.level} #{i.name}"
+  <% parent_options = nested_set_options(Location, location) do |l|
+      "#{'–' * l.level} #{l.name}"
      end
   %>
   <%= form.govuk_select(
         :parent_id, 
         parent_options, 
-        options: { include_blank: 'Set as root' } 
+        options: { include_blank: 'Set as root'} 
       ) %>
-
 
 
   <%= form.govuk_submit %>
@@ -44,7 +41,7 @@
 <% end %>
 
 <%= javascript_tag do %>
-  var inputElement = document.querySelector("#item_tag_list")
+  var inputElement = document.querySelector("#location_tag_list")
   var tagify = new Tagify(inputElement, {
         whitelist : <%= ActsAsTaggableOn::Tag.for_context(:tags).uniq.pluck(:name).to_json.html_safe %>,
         dropdown : {

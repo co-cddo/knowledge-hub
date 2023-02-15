@@ -1,12 +1,8 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
-  factory :item do
-    name { Faker::Commerce.product_name }
-    source_url { Faker::Internet.url }
-    tag_list { [Faker::Internet.slug] }
+  factory :location do
+    name { Faker::Company.name }
     description { Faker::Lorem.paragraph }
-    location
+    tag_list { [Faker::Internet.slug] }
 
     trait :for_params do
       tag_list { [Faker::Internet.slug].map { |tag| { value: tag } }.to_json }

@@ -14,11 +14,16 @@ RSpec.describe "ItemSearches", type: :request, elasticsearch: true do
 
     context "when passed a query" do
       let(:text) { Faker::Lorem.word }
-      let!(:item) { create :item, name: "Foo #{text} bar" }
+      let(:item) { create :item, name: "Foo #{text} bar" }
+
+      before do
+        item
+        # ItemsIndex.import
+      end
 
       it "displays a link to the matching item" do
         get item_searches_path, params: { query: text }
-        expect(response.body).to include(item_path(item))
+        expect(response.body).to include(location_item_path(item.location, item))
       end
     end
   end

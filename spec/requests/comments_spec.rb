@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "/comments", type: :request do
+RSpec.describe "comments", type: :request do
   let(:valid_attributes) do
     attributes_for :comment
   end
@@ -13,39 +13,34 @@ RSpec.describe "/comments", type: :request do
 
   let(:item) { create :item }
   let(:comment) { item.comments.create! valid_attributes }
+  let(:location) { item.location }
 
   describe "GET /index" do
     it "renders a successful response" do
-      get item_comments_path(item_id: item)
+      get location_item_comments_path(location, item)
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      get item_comment_path(item, comment)
+      get location_item_comment_path(location, item, comment)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_item_comment_path(item)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "renders a successful response" do
-      get edit_item_comment_path(item, comment)
+      get new_location_item_comment_path(location, item)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     subject(:post_comment) do
-      post item_comments_path(item), params: { comment: params }
+      post location_item_comments_path(location, item), params: { comment: params }
     end
+
     context "with valid parameters" do
       let(:params) { valid_attributes }
       it "creates a new Comment" do
@@ -56,7 +51,7 @@ RSpec.describe "/comments", type: :request do
 
       it "redirects to the item the comment was created on" do
         post_comment
-        expect(response).to redirect_to(item_url(Item.last))
+        expect(response).to redirect_to(location_item_path(location, Item.last))
       end
     end
 
@@ -75,6 +70,13 @@ RSpec.describe "/comments", type: :request do
     end
   end
 
+  describe "GET /edit" do
+    it "renders a successful response" do
+      get edit_location_item_comment_path(location, item, comment)
+      expect(response).to be_successful
+    end
+  end
+
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) do
@@ -82,21 +84,21 @@ RSpec.describe "/comments", type: :request do
       end
 
       it "updates the requested comment" do
-        patch item_comment_path(item, comment), params: { comment: new_attributes }
+        patch location_item_comment_path(location, item, comment), params: { comment: new_attributes }
         comment.reload
         expect(comment.body).to eq(new_attributes[:body])
       end
 
       it "redirects to the item associated with the requested comment" do
-        patch item_comment_path(item, comment), params: { comment: new_attributes }
+        patch location_item_comment_path(location, item, comment), params: { comment: new_attributes }
         comment.reload
-        expect(response).to redirect_to(item_url(item))
+        expect(response).to redirect_to(location_item_path(location, item))
       end
     end
 
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        patch item_comment_path(item, comment), params: { comment: invalid_attributes }
+        patch location_item_comment_path(location, item, comment), params: { comment: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -107,13 +109,13 @@ RSpec.describe "/comments", type: :request do
       item
       comment
       expect {
-        delete item_comment_path(item, comment)
+        delete location_item_comment_path(location, item, comment)
       }.to change(Comment, :count).by(-1)
     end
 
     it "redirects to the item" do
-      delete item_comment_path(item, comment)
-      expect(response).to redirect_to(item_path(item))
+      delete location_item_comment_path(location, item, comment)
+      expect(response).to redirect_to(location_item_path(location, item))
     end
   end
 end

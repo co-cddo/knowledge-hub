@@ -5,8 +5,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
-  resources :items do
-    resources :comments
+
+  resources :locations do
+    resources :items do
+      resources :comments
+    end
   end
+
   resources :item_searches, only: [:index]
 end

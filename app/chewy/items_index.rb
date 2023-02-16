@@ -3,4 +3,5 @@ class ItemsIndex < Chewy::Index
   field :name
   field :description
   field :tag_list
+  field :remote_content
 end

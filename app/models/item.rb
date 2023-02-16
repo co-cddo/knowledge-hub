@@ -14,5 +14,11 @@ class Item < ApplicationRecord
   validates :name, :description, presence: true
   validates :source_url, url: true
 
+private
+
+  def remote_content
+    @remote_content ||= HtmlScraper.call(source_url) if source_url.present?
+  end
+
   update_index("items") { self }
 end

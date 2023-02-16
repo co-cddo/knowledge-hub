@@ -15,7 +15,7 @@ class ItemsSearch
     if query.present?
       INDEX.query(
         query_string: {
-          fields: %i[name description tag_list],
+          fields: %i[name description tag_list remote_content],
           query:,
           default_operator: "and",
         },

@@ -17,6 +17,10 @@ RSpec.describe "/items", type: :request do
   let(:item) { create :item }
   let(:location) { item.location }
 
+  before do
+    mock_callout_to_source_url_on_item_save
+  end
+
   describe "GET /locations/:location_id/items" do
     it "renders a successful response" do
       get location_items_path(location)

@@ -1,62 +1,82 @@
 <div id="<%= dom_id @item %>">
-  <p>
-    <strong>Name:</strong>
-    <%= link_to @item.name, @item.source_url %>
-  </p>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <%= govspeak_to_html(@item.description) %>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <h2>Metadata</h2>
 
-  <p>
-    <strong>Location: </strong>
-    <%= link_to @item.location.name, @item.location %>
-  </p>
+      <p>
+        <strong>Name:</strong>
+        <%= @item.name %>
+      </p>
 
-  <p>
-    <strong>Tags:</strong>
-    <%= @item.tag_list %>
-  </p>
+      <p>
+        <strong>Location: </strong>
+        <%= link_to @item.location.name, @item.location %>
+      </p>
+
+      <p>
+        <strong>Source URL</strong>
+        <%= link_to @item.source_url %>
+
+      <p>
+        <strong>Tags:</strong>
+        <%= @item.tag_list %>
+      </p>
 
 
-  <p>
-    <strong>Parent:</strong>
-    <% if @item.parent %>
-      <%= link_to @item.parent.name, @item.parent %>
-    <% else %>
-      None - Root item
-    <% end %>
-  </p>
+      <p>
+        <strong>Parent:</strong>
+        <% if @item.parent %>
+          <%= link_to @item.parent.name, @item.parent %>
+        <% else %>
+          None - Root item
+        <% end %>
+      </p>
 
-  <p>
-    <strong>Children:</strong>
-    <% if @item.children.present? %>
-      <% @item.children.each do |child| %>
-        <%= link_to child.name, child %>
-      <% end %>
-    <% else %>
-      None
-    <% end %>
-  </p>
-
-  <hr>
-  <%= govspeak_to_html @item.description %>
-
-</div>
-
-<div>
-  <%= link_to "Edit this item", edit_location_item_path(@location, @item) %>
-
-  <%= button_to "Destroy this item", [@location, @item], method: :delete %>
-</div>
-
-<div>
-  <div>
-    <p>Comments</p>
-    <%= form_with(model: [@location, @item, @item.comments.build]) do |f| %>
-      <div class="govuk-form-group">
-        <%= f.label :body, 'New comment' %>
-        <%= f.text_area :body %>
+      <p>
+        <strong>Children:</strong>
+        <% if @item.children.present? %>
+          <% @item.children.each do |child| %>
+            <%= link_to child.name, child %>
+          <% end %>
+        <% else %>
+          None
+        <% end %>
+      </p>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <%= link_to(
+                "Edit this item",
+                edit_location_item_path(@location, @item),
+                class: "govuk-button govuk-button--secondary"
+              ) %>
+        </div>
+        <div class="govuk-grid-column-one-half">
+          <%= button_to(
+                "Destroy this item",
+                [@location, @item],
+                method: :delete,
+                class: "govuk-button govuk-button--warning"
+              ) %>
+        </div>
       </div>
-      <%= f.submit 'Submit' %>
-    <% end %>
+      <hr class="govuk-section-break govuk-section-break--visible">
+
+      <div class="comments">
+        <h2>Comments</h2>
+        <%= render @item.comments %>
+
+        <%= form_with(model: [@location, @item, @item.comments.build]) do |f| %>
+          <%= f.govuk_text_area :body, label: { text: "New comment" } %>
+          <%= f.govuk_submit 'Add comment' %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
-
-<%= render @item.comments %>

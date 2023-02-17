@@ -28,7 +28,7 @@
     <div class="govuk-width-container ">
       <main class="govuk-main-wrapper " id="main-content" role="main">
         <div class="govuk-grid-row">
-          <div class="govuk-grid-column-two-thirds">
+          <div class="govuk-grid-column-full">
             <%= content_tag(:p, notice, class: 'notice', style: "color: green") if notice.present? %>
             <%= content_tag(:p, alert, class: 'alert', style: "color: red") if alert.present? %>
             <%= render "layouts/search" %>

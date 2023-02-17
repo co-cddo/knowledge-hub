@@ -1,16 +1,30 @@
 <div id="<%= dom_id location %>">
-  <p>
-    <strong>Name:</strong>
-    <%= location.name %>
-  </p>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2><%= location.name %></h2>
 
-  <p>
-    <strong>Description:</strong>
-    <%= location.description %>
-  </p>
-
-  <p>
-    <strong>Parent:</strong>
-    <%= location.parent_id %>
-  </p>
+      <%= govspeak_to_html(location.description) %>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <h2>Metadata</h2>
+      <p>
+        <strong>Parent:</strong>
+        <% if location.parent %>
+          <%= link_to location.parent.name, location.parent %>
+        <% else %>
+          None - Root location
+        <% end %>
+      </p>
+      <p>
+        <strong>Children:</strong>
+        <% if location.children.present? %>
+          <% location.children.each do |child| %>
+            <%= link_to child.name, child %>
+          <% end %>
+        <% else %>
+          None
+        <% end %>
+      </p>
+    </div>
+  </div>
 </div>

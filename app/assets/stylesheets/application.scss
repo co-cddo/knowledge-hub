@@ -1,3 +1,11 @@
 // Sassy
 @import '../../../node_modules/@yaireo/tagify/src/tagify';
 @import "../../../node_modules/govuk-frontend/govuk/all";
+
+.comments {
+  .comment {
+    border: solid #aed6f1;
+    margin: 1em;
+    padding: 1em;
+  }
+}

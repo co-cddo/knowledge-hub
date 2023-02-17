@@ -67,6 +67,7 @@ gem "acts-as-taggable-on"
 gem "chewy"
 
 # GOV.UK design system components
+gem "govuk-components"
 gem "govuk_design_system_formbuilder"
 
 group :development, :test do

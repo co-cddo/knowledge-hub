@@ -18,7 +18,8 @@ RSpec.describe "ItemSearches", type: :request, elasticsearch: true do
 
       before do
         item
-        # ItemsIndex.import
+        mock_callout_to_source_url_on_item_save
+        ItemsIndex.import
       end
 
       it "displays a link to the matching item" do

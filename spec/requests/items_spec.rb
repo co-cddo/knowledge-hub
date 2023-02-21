@@ -110,7 +110,7 @@ RSpec.describe "/items", type: :request do
 
       it "associates the tags with the item" do
         patch location_item_path(location, item), params: { item: attributes }
-        expect(item.reload.tag_list).to eq(tags)
+        expect(item.reload.tag_list).to match_array(tags)
       end
     end
   end

@@ -7,6 +7,8 @@ class HtmlScraper
 
   attr_reader :url
 
+  TAGS_TO_EXCLUDE = %w[style script].freeze
+
   def initialize(url)
     @url = url
   end
@@ -18,7 +20,11 @@ class HtmlScraper
 private
 
   def document
-    Nokogiri::HTML(body)
+    document = Nokogiri::HTML(body)
+    TAGS_TO_EXCLUDE.each do |tag|
+      document.search(tag).remove
+    end
+    document
   end
 
   def response

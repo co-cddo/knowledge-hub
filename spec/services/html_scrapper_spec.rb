@@ -24,10 +24,18 @@ RSpec.describe HtmlScraper do
         <html lang="en" class="govuk-template ">
           <head>
             <title>Blank page</title>
+            <style type="text/css">
+                body {
+                    background-color: #ffffff;
+                }
+            </style>
           </head>
           <body>
             <h1>Foo</h1>
             <p>Bar</p>
+            <script>
+              document.getElementById("example").innerHTML = "Hello JavaScript!";
+            </script>
           </body>
         </html>
       HTML

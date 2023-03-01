@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
+  around_action :use_chewy_active_job_strategy, only: %i[create update destroy]
+
   # GET /items
   def index
     @items = location.items.roots

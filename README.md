@@ -36,6 +36,16 @@ A complimentary task will purge the database:
 rake elasticsearch:purge
 ```
 
+### ActiveJob
+Processing of indexes is done via ActiveJob and Sidekiq. This means the processing is done in a background job.
+
+In development, Sidekiq should be running for processing to run successfully. You may also need to install
+redis locally. To run Sidekiq locally use the following command:
+
+```bash
+sidekiq
+```
+
 ### Specs and Elasticsearch
 
 For the spec to pass, an instance of elasticsearch needs to be running on

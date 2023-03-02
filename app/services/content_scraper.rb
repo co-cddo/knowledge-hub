@@ -7,14 +7,19 @@ class ContentScraper
 
   attr_reader :url
 
-  TAGS_TO_EXCLUDE = %w[style script].freeze
-
   def initialize(url)
     @url = url
   end
 
   def content
-    HtmlParser.call(response.body)
+    case headers["content-type"]
+    when /text\/html/
+      HtmlParser.call(body)
+    when /application\/pdf/
+      PdfParser.call(body)
+    when /text\/plain/
+      body
+    end
   end
 
 private
@@ -23,5 +28,5 @@ private
     Faraday.get(url)
   end
 
-  delegate :body, to: :response
+  delegate :body, :headers, to: :response
 end

@@ -6,34 +6,36 @@ RSpec.describe ContentScraper do
   let(:url) { "http://example.com" }
   let(:body) { "something" }
   let(:html_scraper) { described_class.new(url) }
+  let(:content_type) { "text/plain" }
 
   before do
-    stub_request(:get, url).to_return(body:)
-  end
-
-  describe "#body" do
-    it "returns response body" do
-      expect(html_scraper.body).to eq(body)
-    end
+    stub_request(:get, url).to_return(
+      body:,
+      headers: { "Content-type" => content_type },
+    )
   end
 
   describe ".call" do
-    let(:body) do
-      <<~HTML
-        <!DOCTYPE html>
-        <html lang="en" class="govuk-template ">
-          <head>
-            <title>Blank page</title>
-          </head>
-          <body>
-            <p>Foo Bar</p>
-          </body>
-        </html>
-      HTML
+    it "returns content of response" do
+      expect(described_class.call(url)).to eq(body)
     end
 
-    it "returns stripped content" do
-      expect(described_class.call(url)).to eq("Blank page Foo Bar")
+    context "when HTML" do
+      let(:body) { file_fixture("simple.html") }
+      let(:content_type) { "text/html" }
+
+      it "returns stripped document content" do
+        expect(described_class.call(url)).to eq("Blank page Foo Bar")
+      end
+    end
+
+    context "with PDF" do
+      let(:body) { file_fixture("dummy.pdf") }
+      let(:content_type) { "application/pdf" }
+
+      it "returns the text from the document" do
+        expect(described_class.call(url)).to eq("Dummy PDF file")
+      end
     end
   end
 end

@@ -17,7 +17,7 @@ class HtmlParser
     remove_multiple_spaces
   end
 
-  private
+private
 
   def document
     @document ||= Nokogiri::HTML(html)

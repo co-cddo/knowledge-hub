@@ -17,7 +17,7 @@ class Item < ApplicationRecord
 private
 
   def remote_content
-    @remote_content ||= HtmlScraper.call(source_url) if source_url.present?
+    @remote_content ||= ContentScraper.call(source_url) if source_url.present?
   end
 
   update_index("items") { self }

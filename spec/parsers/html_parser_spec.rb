@@ -2,23 +2,9 @@
 
 require "rails_helper"
 
-RSpec.describe HtmlScraper do
-  let(:url) { "http://example.com" }
-  let(:body) { "something" }
-  let(:html_scraper) { described_class.new(url) }
-
-  before do
-    stub_request(:get, url).to_return(body:)
-  end
-
-  describe "#body" do
-    it "returns response body" do
-      expect(html_scraper.body).to eq(body)
-    end
-  end
-
+RSpec.describe HtmlParser do
   describe ".call" do
-    let(:body) do
+    let(:html) do
       <<~HTML
         <!DOCTYPE html>
         <html lang="en" class="govuk-template ">
@@ -41,8 +27,8 @@ RSpec.describe HtmlScraper do
       HTML
     end
 
-    it "returns stripped content" do
-      expect(described_class.call(url)).to eq("Blank page Foo Bar")
+    it "returns processed content" do
+      expect(described_class.call(html)).to eq("Blank page Foo Bar")
     end
   end
 end

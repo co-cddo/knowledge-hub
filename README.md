@@ -46,6 +46,29 @@ redis locally. To run Sidekiq locally use the following command:
 sidekiq
 ```
 
+#### Sidekiq in Production
+If you deploy via the web Heroku interface the worker may not start. You can use
+the following command to check if the work is running:
+
+```bash
+heroku ps --app knowledge-hub
+```
+
+The output should be something like this:
+```bash
+=== web (Basic): bundle exec puma -C config/puma.rb (1)
+web.1: up 2023/03/03 18:21:42 +0000 (~ 8m ago)
+
+=== worker (Basic): bundle exec sidekiq (1)
+worker.1: up 2023/03/03 18:26:25 +0000 (~ 3m ago)
+```
+If the worker lines are missing the worker is not running.
+
+To start the worker use:
+```bash
+heroku ps:scale worker+1 --app knowledge-hub
+```
+
 ### Specs and Elasticsearch
 
 For the spec to pass, an instance of elasticsearch needs to be running on

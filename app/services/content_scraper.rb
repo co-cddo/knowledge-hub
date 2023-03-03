@@ -20,6 +20,8 @@ class ContentScraper
     when /text\/plain/
       body
     end
+    # TODO: Determine best strategy to handle unknown content types
+    #       (and other errors). Currently this method will return nil
   end
 
 private

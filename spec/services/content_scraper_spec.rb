@@ -37,5 +37,13 @@ RSpec.describe ContentScraper do
         expect(described_class.call(url)).to eq("Dummy PDF file")
       end
     end
+
+    context "with unknown content" do
+      let(:content_type) { "unknown" }
+
+      it "returns nil" do
+        expect(described_class.call(url)).to be_nil
+      end
+    end
   end
 end

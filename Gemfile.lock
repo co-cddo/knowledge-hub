@@ -93,6 +93,7 @@ GEM
       elasticsearch (>= 7.12.0, < 7.14.0)
       elasticsearch-dsl
     concurrent-ruby (1.2.0)
+    connection_pool (2.3.0)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -292,6 +293,7 @@ GEM
     rainbow (3.1.1)
     raindrops (0.20.0)
     rake (13.0.6)
+    redis (4.8.1)
     regexp_parser (2.7.0)
     reline (0.3.2)
       io-console (~> 0.5)
@@ -362,6 +364,10 @@ GEM
       sentry-ruby (~> 5.8.0)
     sentry-ruby (5.8.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
+    sidekiq (6.5.8)
+      connection_pool (>= 2.2.5, < 3)
+      rack (~> 2.0)
+      redis (>= 4.5.0, < 5)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -436,6 +442,7 @@ DEPENDENCIES
   rspec-rails (~> 6.0.0)
   rubocop-govuk
   selenium-webdriver
+  sidekiq (~> 6.5.0)
   stimulus-rails
   turbo-rails
   tzinfo-data

@@ -36,3 +36,6 @@
 /**/.DS_Store
 
 /node_modules
+
+# Redis file
+dump.rdb

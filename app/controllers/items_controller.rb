@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1
   def show
-    item
+    item.record_view
   end
 
   # GET /items/new

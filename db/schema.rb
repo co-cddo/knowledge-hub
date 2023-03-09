@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_13_155903) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_104242) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_155903) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_comments_on_item_id"
+  end
+
+  create_table "item_views", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_views_on_item_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -87,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_155903) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
+  add_foreign_key "item_views", "items"
   add_foreign_key "items", "locations"
   add_foreign_key "taggings", "tags"
 end

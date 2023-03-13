@@ -32,9 +32,8 @@
 en:
   home:
     index:
-      heading: Knowledge Hub
+      heading: Find policies, standards and guidance from across government to support your data use and sharing
       body: |
-        This site holds a catalogue of data standards and taxonomies endorsed or under consideration by the [Data Standards Authority](https://www.gov.uk/government/groups/data-standards-authority),
-        as well as draft guidance that the DSA is working on.
-
-        If you have any questions, [please contact us](mailto:standards-catalogue@digital.cabinet-office.gov.uk).
+        Use the Knowledge Hub to identify policies and standards applicable to your data system or share. Learn from the
+        experience and practices of others who work with data all across government.
+      button_to_most_popular: See most read

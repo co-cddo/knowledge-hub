@@ -1,0 +1,10 @@
+<div class="govuk-grid-row nav">
+  <div class="govuk-grid-column-full">
+    <% Location.roots.each do |root_item| %>
+      <div class="nav-link">
+        <%= link_to root_item.name, root_item %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<hr class="govuk-section-break govuk-section-break--visible">

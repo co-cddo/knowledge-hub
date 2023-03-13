@@ -22,6 +22,21 @@
       <a href="#" class="govuk-header__link govuk-header__service-name">
         Knowledge Hub
       </a>
+      <div class="app-site-search" data-module="app-search" data-search-index="/search-index-9fe6526814d67bd10d885c5c4771fee3.json">
+        <%= form_tag(item_searches_path, method: :get) do %>
+          <label class="govuk-visually-hidden" for="app-site-search__input">
+            Search Knowledge Hub
+          </label>
+          <div class="app-site-search__wrapper">
+            <%= text_field_tag(
+                  'query', params[:query],
+                  class: "app-site-search__input",
+                  placeholder: "Search Knowledge Hub"
+                ) %>
+            <%= image_submit_tag("icon-search.png", class: 'govuk_button', alt: 'Submit Search') %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </header>

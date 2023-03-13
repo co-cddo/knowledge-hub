@@ -1,5 +1,9 @@
-<div class="masthead">
-  <h1><%= t('.heading') %></h1>
-  <%= govspeak_to_html t('.body') %>
-  <%= govuk_start_button(text: t('.button_to_most_popular'), href: item_path(@most_popular_item)) %>
+<div class="govuk-grid-row masthead">
+  <div class="govuk-grid-column-full">
+    <h1 class="app-masthead__title"><%= t('.heading') %></h1>
+    <div class="app-masthead__description">
+      <%= govspeak_to_html t('.body') %>
+    </div>
+    <%= govuk_start_button(text: t('.button_to_most_popular'), href: item_path(@most_popular_item)) %>
+  </div>
 </div>

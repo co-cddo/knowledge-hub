@@ -1,11 +1,46 @@
 // Sassy
 @import '../../../node_modules/@yaireo/tagify/src/tagify';
 @import "../../../node_modules/govuk-frontend/govuk/all";
+@import 'site_search';
 
 .comments {
   .comment {
     border: solid #aed6f1;
     margin: 1em;
     padding: 1em;
+  }
+}
+
+.masthead {
+  background-color: $govuk-brand-colour;
+  margin-bottom: govuk-spacing(8);
+  color: white;
+  font-family: "TransportNew", sans-serif;
+}
+
+.nav {
+  background-color: white;
+
+  .nav-link {
+    display: inline-block;
+    padding: 0.5em 1.5em;
+
+    a {
+      color: $govuk-brand-colour;
+      font-weight: bold;
+      font-family: "TransportNew", sans-serif;
+      text-decoration: none;
+    }
+  }
+}
+
+.app-site-search {
+  .app-site-search__input {
+    width: 80%;
+    background-image: none;
+    padding-left: 0.5em;
+  }
+  .govuk_button {
+    height: 1rem;
   }
 }

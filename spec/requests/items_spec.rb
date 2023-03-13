@@ -29,7 +29,7 @@ RSpec.describe "/items", type: :request do
   end
 
   describe "GET /locations/:location_id/items/:item_id" do
-    subject(:render_show)  { get location_item_path(location, item) }
+    subject(:render_show) { get location_item_path(location, item) }
     it "renders a successful response" do
       render_show
       expect(response).to be_successful

@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ItemView, type: :model do
   describe ".most_popular_item" do
     let(:popular) { create :item }
     let(:unpopular) { create :item }
 
-    it 'returns nil if no view items' do
+    it "returns nil if no view items" do
       expect(described_class.most_popular_item).to eq(nil)
     end
 
@@ -15,7 +15,7 @@ RSpec.describe ItemView, type: :model do
         create_list :item_view, 2, item: popular
       end
 
-      it 'returns the most popular' do
+      it "returns the most popular" do
         expect(described_class.most_popular_item).to eq(popular)
       end
     end
@@ -27,7 +27,7 @@ RSpec.describe ItemView, type: :model do
         create_list :item_view, 2, item: unpopular, created_at: 1.year.ago
       end
 
-      it 'returns the most popular new view item' do
+      it "returns the most popular new view item" do
         expect(described_class.most_popular_item).to eq(popular)
       end
     end
@@ -38,7 +38,7 @@ RSpec.describe ItemView, type: :model do
         create_list :item_view, 2, item: popular, created_at: 1.year.ago
       end
 
-      it 'returns the most popular old view item' do
+      it "returns the most popular old view item" do
         expect(described_class.most_popular_item).to eq(popular)
       end
     end

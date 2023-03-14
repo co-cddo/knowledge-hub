@@ -44,3 +44,12 @@
     height: 1rem;
   }
 }
+
+.location {
+  &:hover {
+    background-color: #C2D6F7;
+  }
+  .description {
+    color: black
+  }
+}

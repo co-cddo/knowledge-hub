@@ -15,10 +15,14 @@
   <div class="govuk-grid-row">
     <% locations.each do |location| %>
       <% if location %>
-        <div class="govuk-grid-column-one-third">
-          <h2><%= link_to location.name, location %></h2>
-          <div><%= govspeak_to_html(location.description) %></div>
-        </div>
+        <%= link_to location do %>
+          <div class="govuk-grid-column-one-third location">
+            <h2><%= location.name %></h2>
+            <div class="description">
+              <%= govspeak_to_html(location.description) %>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   </div>

@@ -10,9 +10,14 @@ class Item < ApplicationRecord
 
   belongs_to :location
   has_many :comments
+  has_many :item_views
 
   validates :name, :description, presence: true
   validates :source_url, url: true
+
+  def record_view
+    item_views.create
+  end
 
 private
 

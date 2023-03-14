@@ -121,11 +121,27 @@ RSpec.describe "/items", type: :request do
   end
 
   describe "DELETE /locations/:location_id/items/:item_id" do
+    before do
+      create(:comment, item:)
+      create :item_view, item:
+    end
+
     it "destroys the requested item" do
-      item # create item before action to ensure count correct
       expect {
         delete location_item_path(location, item)
       }.to change(Item, :count).by(-1)
+    end
+
+    it "destorys the associated comments" do
+      expect {
+        delete location_item_path(location, item)
+      }.to change(Comment, :count).by(-1)
+    end
+
+    it "destorys the associated item views" do
+      expect {
+        delete location_item_path(location, item)
+      }.to change(ItemView, :count).by(-1)
     end
 
     it "redirects to the items list" do

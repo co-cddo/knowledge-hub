@@ -103,6 +103,7 @@ GEM
     debug (1.7.1)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    dibber (0.7.0)
     diff-lcs (1.5.0)
     elasticsearch (7.13.3)
       elasticsearch-api (= 7.13.3)
@@ -428,6 +429,7 @@ DEPENDENCIES
   chewy
   dartsass-rails
   debug
+  dibber
   factory_bot_rails
   faker
   govspeak

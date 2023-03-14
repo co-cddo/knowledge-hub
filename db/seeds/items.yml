@@ -1,0 +1,71 @@
+'Technology Code of Practice':
+  location_id: <%= Location.find_by(name: 'DSA').id %>
+  source_url: 'https://www.gov.uk/government/publications/technology-code-of-practice/technology-code-of-practice'
+  tag_list:
+    - Technology
+    - Code of Practice
+  description: |
+    Technology Code of Practice
+    ======================
+
+    The Technology Code of Practice is a set of criteria to help government design, build and buy technology.
+
+'Using chatbots and webchat tools':
+  location_id: <%= Location.find_by(name: 'DSA').id %>
+  source_url: 'https://www.gov.uk/guidance/using-chatbots-and-webchat-tools'
+  tag_list:
+    - Webchat
+    - Webbot
+  description: |
+    Using chatbots and webchat tools
+    ==========================
+
+    How to use chatbots and webchat tools to improve your users’ experience of your service.
+
+'Get help with benefits and pensions if you have accessibility needs':
+  location_id: <%= Location.find_by(name: 'DSA').id %>
+  source_url: 'https://www.gov.uk/guidance/get-help-with-benefits-and-pensions-if-you-have-accessibility-needs'
+  tag_list:
+    - Benefits
+    - Pensions
+  description: |
+    Get help with benefits and pensions if you have accessibility needs
+    ==================================================
+
+    Get help if you have difficulties claiming benefits and pensions because of a disability or health condition.
+
+'Understanding accessibility requirements for public sector bodies':
+  location_id: <%= Location.find_by(name: 'DSA').id %>
+  source_url: 'https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps'
+  tag_list:
+    - Accessibility
+  description:
+    Understanding accessibility requirements for public sector bodies
+    =================================================
+
+    Help your team understand why they need to meet the website and mobile app accessibility regulations.
+
+'Writing for GOV.UK':
+  location_id: <%= Location.find_by(name: 'DSA').id %>
+  source_url: 'https://www.gov.uk/guidance/content-design/writing-for-gov-uk'
+  description: |
+    Content design: planning, writing and managing content
+    ===========================================
+
+    Writing for GOV.UK
+    --------------------------
+
+    How to write well for your audience, including specialists.
+
+'Digital, Data and Technology Profession Capability Framework':
+  location_id: <%= Location.find_by(name: 'CDDO').id %>
+  source_url: 'https://www.gov.uk/government/collections/digital-data-and-technology-profession-capability-framework'
+  tag_list:
+    - Capability Framework
+    - Technology
+  description: |
+    Digital, Data and Technology Profession Capability Framework
+    ======================
+
+    This Capability Framework describes the job roles in the Digital, Data and Technology (DDaT)
+    Profession and provides details of the skills needed to work at each role level.

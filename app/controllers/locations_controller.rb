@@ -41,8 +41,11 @@ class LocationsController < ApplicationController
 
   # DELETE /locations/1
   def destroy
-    location.destroy
-    redirect_to locations_url, notice: "Location was successfully destroyed."
+    if location.destroy
+      redirect_to locations_url, notice: "Location was successfully destroyed."
+    else
+      redirect_to location, alert: location.errors.full_messages.to_sentence
+    end
   end
 
 private

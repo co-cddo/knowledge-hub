@@ -11,6 +11,7 @@ RSpec.describe "/locations", type: :request do
       description: "",
     }
   end
+  let(:location) { create :location }
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -22,7 +23,6 @@ RSpec.describe "/locations", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      location = Location.create! valid_attributes
       get location_url(location)
       expect(response).to be_successful
     end
@@ -37,7 +37,6 @@ RSpec.describe "/locations", type: :request do
 
   describe "GET /edit" do
     it "renders a successful response" do
-      location = Location.create! valid_attributes
       get edit_location_url(location)
       expect(response).to be_successful
     end
@@ -72,8 +71,6 @@ RSpec.describe "/locations", type: :request do
   end
 
   describe "PATCH /update" do
-    let(:location) { create :location }
-
     context "with valid parameters" do
       it "updates the requested location" do
         patch location_url(location), params: { location: valid_attributes }
@@ -98,16 +95,31 @@ RSpec.describe "/locations", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested location" do
-      location = Location.create! valid_attributes
+      location # initiated before delete call to ensure count is correct
       expect {
         delete location_url(location)
       }.to change(Location, :count).by(-1)
     end
 
     it "redirects to the locations list" do
-      location = Location.create! valid_attributes
       delete location_url(location)
       expect(response).to redirect_to(locations_url)
+    end
+
+    context "with items present" do
+      before { create :item, location: }
+
+      it "does not destroy the requested location" do
+        location
+        expect {
+          delete location_url(location)
+        }.not_to change(Location, :count)
+      end
+
+      it "redirects to the location" do
+        delete location_url(location)
+        expect(response).to redirect_to(location_path(location))
+      end
     end
   end
 end

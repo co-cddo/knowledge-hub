@@ -9,5 +9,8 @@
     <% end %>
   </ul>
 <% else %>
-  <p>No results found</p>
+  <p>
+    No results found <%= "for '#{params[:query]}'" %>
+    <%= "at #{@location.name}" if @location %>
+  </p>
 <% end %>

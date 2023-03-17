@@ -16,15 +16,35 @@ RSpec.describe ItemsSearch, elasticsearch: true do
     end
 
     it "returns the item if name matches" do
-      expect(described_class.search(text).documents).to include(item)
+      expect(described_class.search(query: text).documents).to include(item)
     end
 
     it "returns the item if the remote content matches" do
-      expect(described_class.search(remote_content).documents).to include(item)
+      expect(described_class.search(query: remote_content).documents).to include(item)
     end
 
     it "does not return anything if there is no match" do
-      expect(described_class.search("XXXX").documents).to be_empty
+      expect(described_class.search(query: "XXXX").documents).to be_empty
+    end
+
+    context "with item's location" do
+      let(:location_id) { item.location_id }
+
+      it "returns the item if name and location matches" do
+        expect(described_class.search(query: text, location_id:).documents).to include(item)
+      end
+
+      it "does not return anything if there is no match" do
+        expect(described_class.search(query: "XXXX", location_id:).documents).to be_empty
+      end
+    end
+
+    context "with another location" do
+      let(:location) { create :location }
+
+      it "does not return a match" do
+        expect(described_class.search(query: text, location_id: location.id).documents).to be_empty
+      end
     end
   end
 end

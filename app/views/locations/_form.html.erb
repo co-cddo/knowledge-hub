@@ -29,12 +29,16 @@
       "#{'–' * l.level} #{l.name}"
      end
   %>
-  <%= form.govuk_select(
-        :parent_id, 
-        parent_options, 
-        options: { include_blank: 'Set as root'} 
-      ) %>
 
+  <% if location == @sub_location %>
+    <%= form.hidden_field :parent_id %>
+  <% else %>
+    <%= form.govuk_select(
+          :parent_id,
+          parent_options,
+          options: { include_blank: 'Set as root'}
+        ) %>
+  <% end %>
 
   <%= form.govuk_submit %>
 

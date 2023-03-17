@@ -1,8 +1,6 @@
 <div id="<%= dom_id location %>">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h2><%= location.name %></h2>
-
       <%= govspeak_to_html(location.description) %>
     </div>
     <div class="govuk-grid-column-one-third">
@@ -25,6 +23,37 @@
           None
         <% end %>
       </p>
+
+
+      <div class="govuk-button-group">
+        <%= button_to(
+              "Edit this location",
+              edit_location_path(location),
+              method: :get,
+              class: "govuk-button govuk-button--secondary"
+            ) %>
+
+        <%= button_to(
+              "Destroy this location",
+              location,
+              method: :delete,
+              class: "govuk-button govuk-button--warning"
+            )%>
+
+        <%= button_to(
+              "Add item at this location",
+              new_location_item_path(location),
+              method: :get,
+              class: "govuk-button govuk-button--secondary"
+            ) %>
+
+        <%= button_to(
+              "Add sub-location",
+               new_sub_location_location_path(location),
+              method: :get,
+              class: "govuk-button govuk-button--secondary"
+            ) %>
+      </div>
     </div>
   </div>
 </div>

@@ -105,6 +105,7 @@ GEM
       reline (>= 0.3.1)
     dibber (0.7.0)
     diff-lcs (1.5.0)
+    docile (1.4.0)
     elasticsearch (7.13.3)
       elasticsearch-api (= 7.13.3)
       elasticsearch-transport (= 7.13.3)
@@ -369,6 +370,12 @@ GEM
       connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -445,6 +452,7 @@ DEPENDENCIES
   rubocop-govuk
   selenium-webdriver
   sidekiq (~> 6.5.0)
+  simplecov
   stimulus-rails
   turbo-rails
   tzinfo-data

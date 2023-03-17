@@ -13,7 +13,7 @@ RSpec.describe "/locations", type: :request do
   end
   let(:location) { create :location }
 
-  describe "GET /index" do
+  describe "GET #index" do
     it "renders a successful response" do
       Location.create! valid_attributes
       get locations_url
@@ -21,28 +21,35 @@ RSpec.describe "/locations", type: :request do
     end
   end
 
-  describe "GET /show" do
+  describe "GET #show" do
     it "renders a successful response" do
       get location_url(location)
       expect(response).to be_successful
     end
   end
 
-  describe "GET /new" do
+  describe "GET #new" do
     it "renders a successful response" do
       get new_location_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /edit" do
+  describe "GET #edit" do
     it "renders a successful response" do
       get edit_location_url(location)
       expect(response).to be_successful
     end
   end
 
-  describe "POST /create" do
+  describe "GET #new_sub_location" do
+    it "renders a successful response" do
+      get new_sub_location_location_url(location)
+      expect(response).to be_successful
+    end
+  end
+
+  describe "POST #create" do
     context "with valid parameters" do
       it "creates a new Location" do
         expect {
@@ -70,7 +77,7 @@ RSpec.describe "/locations", type: :request do
     end
   end
 
-  describe "PATCH /update" do
+  describe "PATCH #update" do
     context "with valid parameters" do
       it "updates the requested location" do
         patch location_url(location), params: { location: valid_attributes }
@@ -93,7 +100,7 @@ RSpec.describe "/locations", type: :request do
     end
   end
 
-  describe "DELETE /destroy" do
+  describe "DELETE #destroy" do
     it "destroys the requested location" do
       location # initiated before delete call to ensure count is correct
       expect {

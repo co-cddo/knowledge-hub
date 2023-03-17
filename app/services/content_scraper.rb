@@ -1,5 +1,4 @@
-# Returns the
-
+# Returns the content from a remote resource
 class ContentScraper
   def self.call(url)
     new(url).content

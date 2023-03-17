@@ -4,10 +4,8 @@ module ItemsHelper
   end
 
   def item_breadcrumbs(item)
-    root_location = item.ancestors.present? ? item.ancestors.first.location : item.location
-    [
-      link_to(root_location.name, location_path(root_location)),
-      item.ancestors.map { |i| link_to i.name, item_path(i) },
-    ].flatten
+    location = item.ancestors.present? ? item.ancestors.first.location : item.location
+    hash = location_breadcrumbs(location)
+    item.ancestors.each_with_object(hash) { |i, h| h[i.name] = item_path(i) }
   end
 end

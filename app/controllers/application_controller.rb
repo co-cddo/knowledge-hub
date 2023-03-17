@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   def use_chewy_active_job_strategy(&block)
     return yield if Rails.env.test?
 
+    # :nocov:
     Chewy.strategy(:active_job, &block)
+    # :nocov:
   end
 end

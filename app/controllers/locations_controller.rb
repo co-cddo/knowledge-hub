@@ -48,6 +48,10 @@ class LocationsController < ApplicationController
     end
   end
 
+  def new_sub_location
+    @sub_location = location.children.build
+  end
+
 private
 
   def location

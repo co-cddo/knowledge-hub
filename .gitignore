@@ -39,3 +39,6 @@
 
 # Redis file
 dump.rdb
+
+# Code coverage reports
+/coverage/*

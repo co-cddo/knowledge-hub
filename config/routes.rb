@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
   resources :locations do
+    member do
+      get :new_sub_location
+    end
+
     resources :items do
       resources :comments
     end

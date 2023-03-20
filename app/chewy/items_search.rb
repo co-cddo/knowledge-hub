@@ -7,9 +7,11 @@ class ItemsSearch
 
   attr_reader :query, :location_id
 
-  def initialize(query:, location_id: nil)
+  def initialize(query:, location_id: [])
     @query = query
-    @location_id = location_id
+    @location_id = [location_id]
+    @location_id.flatten!
+    @location_id.compact!
   end
 
   def search
@@ -31,6 +33,6 @@ class ItemsSearch
   end
 
   def location_filter
-    INDEX.filter(match: { location_id: })
+    INDEX.filter(terms: { location_id: })
   end
 end

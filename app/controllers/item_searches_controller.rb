@@ -6,7 +6,10 @@ class ItemSearchesController < ApplicationController
 private
 
   def location_id
-    location.id if location
+    return unless location
+    return location.id unless params[:include_sub_locations]
+
+    [location.id] + location.children.map(&:id)
   end
 
   def location

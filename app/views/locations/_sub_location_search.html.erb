@@ -1,0 +1,30 @@
+<div class="location-search">
+  <%= form_tag(search_location_path(location), method: :get) do %>
+    <%= label_tag(
+          "location-search__input",
+          "Search this location",
+          class:"govuk-visually-hidden"
+        ) %>
+    </label>
+    <%= text_field_tag(
+          'query', params[:query],
+          id: "location-search__input",
+          class: "location-search__input govuk-input govuk-input--width-20",
+          placeholder: "Search this location"
+        ) %>
+    <%= submit_tag 'Search', class: "govuk-button govuk-button--secondary" %>
+    <div class="govuk-checkboxes__item">
+      <%= check_box_tag(
+            :include_sub_locations,
+            "1",
+            true,
+            class: "govuk-checkboxes__input"
+          ) %>
+      <%= label_tag(
+            :include_sub_locations,
+            'Include sub-locations in search',
+            class: "govuk-label govuk-checkboxes__label"
+          ) %>
+    </div>
+  <% end %>
+</div>

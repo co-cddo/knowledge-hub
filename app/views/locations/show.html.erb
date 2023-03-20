@@ -1,21 +1,8 @@
 <%= govuk_breadcrumbs breadcrumbs: location_breadcrumbs(@location) %>
 
-<div class="location-search">
-  <%= form_tag(search_location_path(@location), method: :get) do %>
-    <label class="govuk-visually-hidden" for="location-search__input">
-      Search this location
-    </label>
-    <%= text_field_tag(
-          'query', params[:query],
-          id: "location-search__input",
-          class: "location-search__input govuk-input govuk-input--width-20",
-          placeholder: "Search this location"
-        ) %>
-    <%= submit_tag 'Search', class: "govuk-button govuk-button--secondary" %>
-  <% end %>
-</div>
-
 <%= render @location %>
+
+
 
 <h2><%= @location.name %> Items</h2>
 
@@ -30,6 +17,9 @@
 <hr class="govuk-section-break govuk-section-break--visible">
 
 <div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <%= content_tag(:h2, "Sub-locations of #{@location.name}") if @location.children.present? %>
+  </div>
   <% @location.children.each do |sub_location| %>
     <div class="govuk-grid-column-one-half">
       <div class="sub-location">
@@ -45,4 +35,12 @@
       </div>
     </div>
   <% end %>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-5">
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <%= render "sub_location_search", location: @location %>
+  </div>
 </div>

@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   acts_as_taggable_on :tags
 
   belongs_to :location
+
   has_many :comments, dependent: :destroy
   has_many :item_views, dependent: :destroy
 

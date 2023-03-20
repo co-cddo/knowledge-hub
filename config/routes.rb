@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :locations do
     member do
       get :new_sub_location
+      get :search, to: "item_searches#index"
     end
 
     resources :items do

@@ -1,5 +1,7 @@
 # Returns the content from a remote resource
 class ContentScraper
+  require "faraday/follow_redirects"
+
   def self.call(url)
     new(url).content
   end
@@ -26,7 +28,11 @@ class ContentScraper
 private
 
   def response
-    Faraday.get(url)
+    conn = Faraday.new do |faraday|
+      faraday.response :follow_redirects
+    end
+
+    conn.get(url)
   end
 
   delegate :body, :headers, to: :response

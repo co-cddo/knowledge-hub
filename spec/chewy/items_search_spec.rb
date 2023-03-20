@@ -46,5 +46,23 @@ RSpec.describe ItemsSearch, elasticsearch: true do
         expect(described_class.search(query: text, location_id: location.id).documents).to be_empty
       end
     end
+
+    context "with two locations including the items" do
+      let(:other_location) { create :location }
+      let(:location_id) { [other_location.id, item.location_id] }
+
+      it "returns the item if name and location matches" do
+        expect(described_class.search(query: text, location_id:).documents).to include(item)
+      end
+    end
+
+    context "with two other locations" do
+      let(:other_locations) { create_list :location, 2 }
+      let(:location_id) { other_locations.map(&:id) }
+
+      it "does not return a match" do
+        expect(described_class.search(query: text, location_id:).documents).to be_empty
+      end
+    end
   end
 end

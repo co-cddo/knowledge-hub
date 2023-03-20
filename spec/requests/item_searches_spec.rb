@@ -65,6 +65,26 @@ RSpec.describe "ItemSearches", type: :request, elasticsearch: true do
           expect(response.body).to include("No results found")
         end
       end
+
+      context "with a sub-location" do
+        let(:parent_location) { create :location }
+        let(:location) { create :location, parent_id: parent_location.id }
+
+        it "states nothing found" do
+          get search_location_path(parent_location), params: { query: text }
+          expect(response.body).to include("No results found")
+        end
+      end
+
+      context "with a sub-location and include sub-locations selected" do
+        let(:parent_location) { create :location }
+        let(:location) { create :location, parent_id: parent_location.id }
+
+        it "displays a link to the matching item" do
+          get search_location_path(parent_location), params: { query: text, include_sub_locations: true }
+          expect(response.body).to include(location_item_path(item.location, item))
+        end
+      end
     end
   end
 end

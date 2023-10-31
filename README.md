@@ -1,5 +1,24 @@
 Knowledge Hub
 ===============
+This application is built to provide information on the location of knowledge items.
+A knowledge item is typically a web page contain information about various subjects.
+
+The hub is built to be generic with each item having a description and a location URL.
+The location URL being the place where the knowledge exists.
+
+The items could be arranged in a heirachy so that similar items could be grouped within
+a parent item, or an item could have a series of subitems as child items.
+It is envisaged that the top level parent items could be organisational units such as
+government departments.
+
+A search tool is included. This contained the data scraped from the location URL. So
+a search action gathers not only the information in the item description, but
+also data from the remote resource itself.
+
+Project Status
+--------------
+This project has been archive. The application is currently at the prototype stage
+and should be considered as an example of how a knowledge hub could be constructed.
 
 Elasticsearch
 -------------
